@@ -47,18 +47,18 @@
     "tesseract.js-core": "6.0.0"
   },
   "devDependencies": {
-    "@axe-core/playwright": "4.10.2",
-    "@playwright/test": "1.55.1",
-    "@tailwindcss/vite": "4.1.13",
+    "@axe-core/playwright": "4.13.0",
+    "@playwright/test": "1.63.0",
+    "@tailwindcss/vite": "4.3.3",
     "@types/canvas-confetti": "1.9.0",
-    "@types/node": "22.18.6",
+    "@types/node": "26.6.2",
     "@types/react": "19.1.13",
     "@types/react-dom": "19.1.9",
-    "@vitejs/plugin-react": "4.7.0",
-    "tailwindcss": "4.1.13",
-    "typescript": "5.9.2",
-    "vite": "6.4.3",
-    "vitest": "4.1.11"
+    "@vitejs/plugin-react": "6.1.1",
+    "tailwindcss": "4.3.3",
+    "typescript": "7.0.2",
+    "vite": "8.3.0",
+    "vitest": "5.0.1"
   },
   "overrides": {
     "playwright-core": "1.55.1"
