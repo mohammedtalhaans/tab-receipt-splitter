@@ -1,0 +1,83 @@
+[
+  {
+    "name": "clean",
+    "file": "clean.png",
+    "groundTruth": "clean.txt",
+    "itemCount": 10,
+    "totalMinor": 22550,
+    "currency": "AUD",
+    "synthetic": true
+  },
+  {
+    "name": "angled",
+    "file": "angled.png",
+    "groundTruth": "angled.txt",
+    "itemCount": 10,
+    "totalMinor": 22550,
+    "currency": "AUD",
+    "synthetic": true
+  },
+  {
+    "name": "dim",
+    "file": "dim.png",
+    "groundTruth": "dim.txt",
+    "itemCount": 10,
+    "totalMinor": 22550,
+    "currency": "AUD",
+    "synthetic": true
+  },
+  {
+    "name": "crumpled",
+    "file": "crumpled.png",
+    "groundTruth": "crumpled.txt",
+    "itemCount": 10,
+    "totalMinor": 22550,
+    "currency": "AUD",
+    "synthetic": true
+  },
+  {
+    "name": "small-font",
+    "file": "small-font.png",
+    "groundTruth": "small-font.txt",
+    "itemCount": 10,
+    "totalMinor": 22550,
+    "currency": "AUD",
+    "synthetic": true
+  },
+  {
+    "name": "service-charge",
+    "file": "service-charge.png",
+    "groundTruth": "service-charge.txt",
+    "itemCount": 10,
+    "totalMinor": 22550,
+    "currency": "AUD",
+    "synthetic": true
+  },
+  {
+    "name": "discount",
+    "file": "discount.png",
+    "groundTruth": "discount.txt",
+    "itemCount": 3,
+    "totalMinor": 2800,
+    "currency": "AUD",
+    "synthetic": true
+  },
+  {
+    "name": "quantities",
+    "file": "quantities.png",
+    "groundTruth": "quantities.txt",
+    "itemCount": 3,
+    "totalMinor": 3600,
+    "currency": "AUD",
+    "synthetic": true
+  },
+  {
+    "name": "long",
+    "file": "long.png",
+    "groundTruth": "long.txt",
+    "itemCount": 24,
+    "totalMinor": 7920,
+    "currency": "AUD",
+    "synthetic": true
+  }
+]

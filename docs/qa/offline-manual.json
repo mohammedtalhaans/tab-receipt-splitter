@@ -1,0 +1,16 @@
+{
+  "unsupported_escape": true,
+  "missing_total_blocks": true,
+  "duplicate_rejected": true,
+  "unassigned_blocks": true,
+  "odd_cents_label": "$2.25\u2013$2.26 each",
+  "amounts": [
+    "$2.26",
+    "$2.25"
+  ],
+  "total": "$4.51",
+  "overflow": false,
+  "clipboard_fallback": true,
+  "errors": [],
+  "validation_scope": "Offline QA: real React, application source, and browser Canvas; stand-ins for unavailable Motion, Radix, Lucide, and styling dependencies. Not a production build or device validation."
+}

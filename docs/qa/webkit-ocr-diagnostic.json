@@ -1,0 +1,20 @@
+{
+  "date": "2026-09-12",
+  "runtime": "Playwright WebKit on Windows, iPhone 13 emulation",
+  "url": "http://127.0.0.1:4173/tab-receipt-splitter/",
+  "fixture": "tests/fixtures/clean.png",
+  "isolatedRunsPassed": 2,
+  "secondRun": {
+    "ocrWorkerCreatedSeconds": 0.8,
+    "ocrWorkerTerminatedSeconds": 2.0,
+    "readyObservedSeconds": 5.7,
+    "reviewItems": 10,
+    "reconciliation": "Receipt matched — Every cent accounted for.",
+    "requests": 16,
+    "failedRequests": [],
+    "writeRequests": [],
+    "pageErrors": []
+  },
+  "observation": "Earlier combined-suite WebKit stall was not reproduced. Local OCR completed and exact receipt reconciliation passed in both isolated production runs. Small inline font CSP rejection was found separately and reported for release correction.",
+  "limits": "Desktop WebKit emulation does not verify a physical iPhone camera, memory behavior, native photo decoding, or sharing."
+}

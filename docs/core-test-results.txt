@@ -1,0 +1,94 @@
+PASS [parser] money parses 12.00 into exact minor units
+PASS [parser] money parses $12.00 into exact minor units
+PASS [parser] money parses €12,00 into exact minor units
+PASS [parser] money parses -4.50 into exact minor units
+PASS [parser] money parses -$4.50 into exact minor units
+PASS [parser] money parses $ -4.50 into exact minor units
+PASS [parser] money parses (4.50) into exact minor units
+PASS [parser] money parses 4.50- into exact minor units
+PASS [parser] money parses 1,234.56 into exact minor units
+PASS [parser] money parses 1.234,56 into exact minor units
+PASS [parser] money parses 12 into exact minor units
+PASS [parser] money parses 0.01 into exact minor units
+PASS [parser] money parses 12.5 into exact minor units
+PASS [parser] money parses AUD 12.00 into exact minor units
+PASS [parser] money parses 1 234,56 into exact minor units
+PASS [parser] money rejects malformed amount hello
+PASS [parser] money rejects malformed amount NaN
+PASS [parser] money rejects malformed amount Infinity
+PASS [parser] money rejects malformed amount 1.2.3
+PASS [parser] money rejects malformed amount 1,23,45
+PASS [parser] money rejects malformed amount --4.50
+PASS [parser] money rejects malformed amount 4.5050
+PASS [parser] money rejects malformed amount 1000001.00
+PASS [parser] money rejects malformed amount 12%
+PASS [parser] normal receipt with total
+PASS [parser] quantity prefix stores the line total, not unit price multiplication
+PASS [parser] unit and extended prices use the final column
+PASS [parser] decimal comma and euro currency
+PASS [parser] pound symbol detected
+PASS [parser] explicit currencies override the configured dollar default
+PASS [parser] ambiguous dollar retains the user currency
+PASS [parser] subtotal is not an item or the grand total
+PASS [parser] service surcharge discount and actual gratuity
+PASS [parser] positive printed discount is a credit
+PASS [parser] explicit included tax is not added twice
+PASS [parser] implicit GST inclusion requires an exact mathematical match
+PASS [parser] exclusive tax stays exclusive
+PASS [parser] missing total is not fabricated
+PASS [parser] duplicate lines are retained and marked for checking
+PASS [parser] weird spacing and OCR O/I repairs are flagged
+PASS [parser] actual low OCR confidence appears as a check state
+PASS [parser] payment and suggested-tip lines do not become items
+PASS [parser] price on its own line attaches to the preceding label
+PASS [parser] demo has ten items and an exactly matched 225.50 bill
+PASS [parser] zero cents is a real price
+PASS [splitting] single-person item
+PASS [splitting] two-person shared item
+PASS [splitting] odd cent and tie break follow participant order
+PASS [splitting] three-way division
+PASS [splitting] negative amount retains exact sign
+PASS [splitting] zero-value extra allocates no money
+PASS [splitting] zero weights fall back to equal shares
+PASS [splitting] largest fractional remainders receive the extra cents
+PASS [splitting] negative weights and decimal cents rejected
+PASS [splitting] percentage tipping rounds half-up in integer arithmetic
+PASS [splitting] proportional service charge
+PASS [splitting] proportional tip uses item subtotal, not fees
+PASS [splitting] discount allocation reduces shares proportionally
+PASS [splitting] even extras include all table participants explicitly
+PASS [splitting] unassigned item blocks results
+PASS [splitting] unknown participant blocks results
+PASS [splitting] duplicate assignments do not duplicate money
+PASS [splitting] mismatch blocks final calculation
+PASS [splitting] inclusive taxes are explanatory, not allocated again
+PASS [splitting] zero-order participant receives no proportional extras
+PASS [splitting] excessive discounts never produce negative final balances
+PASS [splitting] running subtotals agree with final item shares
+PASS [splitting] a zero-value meal can still be split
+PASS [splitting] 5,000 seeded allocation cases preserve sums and quotas
+PASS [splitting] 500 seeded complete bills reconcile with mixed extras and tips
+PASS [state] initial session is empty and in memory only
+PASS [state] workflow guards prevent jumping to unearned results
+PASS [state] removing a person cleans every assignment
+PASS [state] duplicate and blank participant names are rejected
+PASS [state] delete item removes obsolete assignments
+PASS [state] everyone shortcut assigns each person once
+PASS [state] reset destroys receipt, names, tip and assignments
+PASS [state] confirmed total preserves original OCR total
+PASS [capture] non-image and executable SVG input rejected
+PASS [capture] empty and oversized images rejected before decoding
+PASS [capture] native camera image and extension fallback accepted
+PASS [parser] synthetic clean ground truth parses and reconciles
+PASS [parser] synthetic angled ground truth parses and reconciles
+PASS [parser] synthetic dim ground truth parses and reconciles
+PASS [parser] synthetic crumpled ground truth parses and reconciles
+PASS [parser] synthetic small-font ground truth parses and reconciles
+PASS [parser] synthetic service-charge ground truth parses and reconciles
+PASS [parser] synthetic discount ground truth parses and reconciles
+PASS [parser] synthetic quantities ground truth parses and reconciles
+PASS [parser] synthetic long ground truth parses and reconciles
+PASS [parser] real native OCR observation: unreadable dim total stays unconfirmed
+PASS [parser] real native OCR observation: crumpled eight-cent error is not hidden
+
+92/92 cases passed in 57ms. Includes 5,500 seeded invariant scenarios.

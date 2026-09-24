@@ -1,0 +1,34 @@
+Your salad shouldn't cost the same as my steak.
+
+So I built tab:
+split a receipt by who ordered what.
+
+This is a sample bill.
+Ten items, five people.
+
+Ribeye: me.
+Pasta: Maya.
+
+We shared the fries,
+so I tap three names.
+
+Water: everyone.
+
+The important bit?
+Service follows what you ordered.
+Included tax doesn't get added twice.
+
+And everyone's share adds up to exactly
+two hundred and twenty-five dollars fifty.
+
+Save the card.
+Send it to the group.
+Dinner, dealt with.
+
+Real photos use an on-device reader.
+You check what it read before splitting.
+
+This is my series rebuilding
+useful app features with AI.
+
+What should I build next?

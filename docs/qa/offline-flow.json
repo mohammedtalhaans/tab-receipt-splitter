@@ -1,0 +1,240 @@
+{
+  "errors": [],
+  "consoleErrors": [],
+  "requests": [
+    {
+      "url": "http://localhost:4173/receipt-splitter/src/styles/globals.css",
+      "method": "GET"
+    },
+    {
+      "url": "http://localhost:4173/receipt-splitter/src/main.js",
+      "method": "GET"
+    },
+    {
+      "url": "http://localhost:4173/receipt-splitter/shims/react.js",
+      "method": "GET"
+    },
+    {
+      "url": "http://localhost:4173/receipt-splitter/src/App.js",
+      "method": "GET"
+    },
+    {
+      "url": "http://localhost:4173/receipt-splitter/vendor/react-runtime.js",
+      "method": "GET"
+    },
+    {
+      "url": "http://localhost:4173/receipt-splitter/shims/motion.js",
+      "method": "GET"
+    },
+    {
+      "url": "http://localhost:4173/receipt-splitter/shims/icons.js",
+      "method": "GET"
+    },
+    {
+      "url": "http://localhost:4173/receipt-splitter/src/app/context.js",
+      "method": "GET"
+    },
+    {
+      "url": "http://localhost:4173/receipt-splitter/src/app/state.js",
+      "method": "GET"
+    },
+    {
+      "url": "http://localhost:4173/receipt-splitter/src/components/ui/common.js",
+      "method": "GET"
+    },
+    {
+      "url": "http://localhost:4173/receipt-splitter/src/components/ui/button.js",
+      "method": "GET"
+    },
+    {
+      "url": "http://localhost:4173/receipt-splitter/src/components/ui/modal.js",
+      "method": "GET"
+    },
+    {
+      "url": "http://localhost:4173/receipt-splitter/src/components/ui/confirm.js",
+      "method": "GET"
+    },
+    {
+      "url": "http://localhost:4173/receipt-splitter/src/components/ui/tooltip.js",
+      "method": "GET"
+    },
+    {
+      "url": "http://localhost:4173/receipt-splitter/src/components/ui/separator.js",
+      "method": "GET"
+    },
+    {
+      "url": "http://localhost:4173/receipt-splitter/src/hooks/use-page-visibility.js",
+      "method": "GET"
+    },
+    {
+      "url": "http://localhost:4173/receipt-splitter/src/lib/config.js",
+      "method": "GET"
+    },
+    {
+      "url": "http://localhost:4173/receipt-splitter/src/lib/motion.js",
+      "method": "GET"
+    },
+    {
+      "url": "http://localhost:4173/receipt-splitter/src/app/screens/home.js",
+      "method": "GET"
+    },
+    {
+      "url": "http://localhost:4173/receipt-splitter/src/app/screens/capture.js",
+      "method": "GET"
+    },
+    {
+      "url": "http://localhost:4173/receipt-splitter/src/app/screens/processing.js",
+      "method": "GET"
+    },
+    {
+      "url": "http://localhost:4173/receipt-splitter/src/app/screens/review.js",
+      "method": "GET"
+    },
+    {
+      "url": "http://localhost:4173/receipt-splitter/src/app/screens/people.js",
+      "method": "GET"
+    },
+    {
+      "url": "http://localhost:4173/receipt-splitter/src/app/screens/assign.js",
+      "method": "GET"
+    },
+    {
+      "url": "http://localhost:4173/receipt-splitter/src/app/screens/extras.js",
+      "method": "GET"
+    },
+    {
+      "url": "http://localhost:4173/receipt-splitter/src/app/screens/results.js",
+      "method": "GET"
+    },
+    {
+      "url": "http://localhost:4173/receipt-splitter/src/features/ocr/use-scanner.js",
+      "method": "GET"
+    },
+    {
+      "url": "http://localhost:4173/receipt-splitter/src/features/splitting/engine.js",
+      "method": "GET"
+    },
+    {
+      "url": "http://localhost:4173/receipt-splitter/src/lib/money.js",
+      "method": "GET"
+    },
+    {
+      "url": "http://localhost:4173/receipt-splitter/src/lib/utils.js",
+      "method": "GET"
+    },
+    {
+      "url": "http://localhost:4173/receipt-splitter/shims/utils.js",
+      "method": "GET"
+    },
+    {
+      "url": "http://localhost:4173/receipt-splitter/shims/dialog.js",
+      "method": "GET"
+    },
+    {
+      "url": "http://localhost:4173/receipt-splitter/shims/tooltip.js",
+      "method": "GET"
+    },
+    {
+      "url": "http://localhost:4173/receipt-splitter/shims/separator.js",
+      "method": "GET"
+    },
+    {
+      "url": "http://localhost:4173/receipt-splitter/src/components/receipt/hero-receipt.js",
+      "method": "GET"
+    },
+    {
+      "url": "http://localhost:4173/receipt-splitter/src/components/aceternity-inspired/file-upload.js",
+      "method": "GET"
+    },
+    {
+      "url": "http://localhost:4173/receipt-splitter/src/components/aceternity-inspired/focus-glow.js",
+      "method": "GET"
+    },
+    {
+      "url": "http://localhost:4173/receipt-splitter/src/components/magic/border-beam.js",
+      "method": "GET"
+    },
+    {
+      "url": "http://localhost:4173/receipt-splitter/src/components/receipt/editors.js",
+      "method": "GET"
+    },
+    {
+      "url": "http://localhost:4173/receipt-splitter/src/components/receipt/reconciliation.js",
+      "method": "GET"
+    },
+    {
+      "url": "http://localhost:4173/receipt-splitter/src/components/magic/number-ticker.js",
+      "method": "GET"
+    },
+    {
+      "url": "http://localhost:4173/receipt-splitter/src/components/ui/progress.js",
+      "method": "GET"
+    },
+    {
+      "url": "http://localhost:4173/receipt-splitter/src/components/magic/blur-fade.js",
+      "method": "GET"
+    },
+    {
+      "url": "http://localhost:4173/receipt-splitter/src/components/ui/input.js",
+      "method": "GET"
+    },
+    {
+      "url": "http://localhost:4173/receipt-splitter/src/components/assignment/assignment-card.js",
+      "method": "GET"
+    },
+    {
+      "url": "http://localhost:4173/receipt-splitter/src/components/ui/segmented.js",
+      "method": "GET"
+    },
+    {
+      "url": "http://localhost:4173/receipt-splitter/src/components/magic/confetti.js",
+      "method": "GET"
+    },
+    {
+      "url": "http://localhost:4173/receipt-splitter/src/components/results/share-sheet.js",
+      "method": "GET"
+    },
+    {
+      "url": "http://localhost:4173/receipt-splitter/src/features/sharing/summary.js",
+      "method": "GET"
+    },
+    {
+      "url": "http://localhost:4173/receipt-splitter/src/features/parser/parse-receipt.js",
+      "method": "GET"
+    },
+    {
+      "url": "http://localhost:4173/receipt-splitter/src/test-data/demo.js",
+      "method": "GET"
+    },
+    {
+      "url": "http://localhost:4173/receipt-splitter/src/features/splitting/allocate.js",
+      "method": "GET"
+    },
+    {
+      "url": "http://localhost:4173/receipt-splitter/shims/progress.js",
+      "method": "GET"
+    },
+    {
+      "url": "http://localhost:4173/receipt-splitter/shims/toggle.js",
+      "method": "GET"
+    },
+    {
+      "url": "http://localhost:4173/receipt-splitter/src/components/ui/skeleton.js",
+      "method": "GET"
+    },
+    {
+      "url": "http://localhost:4173/receipt-splitter/icons/favicon.svg",
+      "method": "GET"
+    },
+    {
+      "url": "http://localhost:4173/receipt-splitter/demo/receipt.svg",
+      "method": "GET"
+    },
+    {
+      "url": "http://localhost:4173/receipt-splitter/src/features/sharing/export-image.js",
+      "method": "GET"
+    }
+  ],
+  "scope": "Same app source under real React 19.1.1; temporary adapters for inaccessible Motion/Radix/Lucide packages; not a production bundle.",
+  "validation_scope": "Offline QA: real React, application source, and browser Canvas; stand-ins for unavailable Motion, Radix, Lucide, and styling dependencies. Not a production build or device validation."
+}

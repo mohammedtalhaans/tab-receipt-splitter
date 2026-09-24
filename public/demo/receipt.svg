@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="700" height="1120" viewBox="0 0 700 1120">
+<rect width="700" height="1120" fill="#f5f0e6"/>
+<g font-family="monospace" font-size="28" fill="#151515">
+<text x="65" y="105" xml:space="preserve">NORTH &amp; EMBER</text>
+<text x="65" y="150" xml:space="preserve">A VERY GOOD DINNER</text>
+<text x="65" y="195" xml:space="preserve">--------------------------------</text>
+<text x="65" y="240" xml:space="preserve">Burrata                    18.00</text>
+<text x="65" y="285" xml:space="preserve">Sourdough                   9.00</text>
+<text x="65" y="330" xml:space="preserve">Ribeye                     46.00</text>
+<text x="65" y="375" xml:space="preserve">Rigatoni                   28.00</text>
+<text x="65" y="420" xml:space="preserve">Market fish                34.00</text>
+<text x="65" y="465" xml:space="preserve">Truffle fries              12.00</text>
+<text x="65" y="510" xml:space="preserve">Green salad                10.00</text>
+<text x="65" y="555" xml:space="preserve">2 x House red              24.00</text>
+<text x="65" y="600" xml:space="preserve">Sparkling water             8.00</text>
+<text x="65" y="645" xml:space="preserve">Tiramisu                   16.00</text>
+<text x="65" y="690" xml:space="preserve">--------------------------------</text>
+<text x="65" y="735" xml:space="preserve">SUBTOTAL                  205.00</text>
+<text x="65" y="780" xml:space="preserve">Service charge 10%         20.50</text>
+<text x="65" y="825" xml:space="preserve">GST included               20.50</text>
+<text x="65" y="870" xml:space="preserve">TOTAL AUD                 225.50</text>
+<text x="65" y="915" xml:space="preserve">--------------------------------</text>
+<text x="65" y="960" xml:space="preserve">GOOD FOOD. GOOD COMPANY.</text>
+<text x="65" y="1005" xml:space="preserve">Synthetic receipt / sample only</text>
+</g></svg>

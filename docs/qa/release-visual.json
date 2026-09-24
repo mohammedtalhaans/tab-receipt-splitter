@@ -1,0 +1,251 @@
+{
+  "baseURL": "http://127.0.0.1:4173/tab-receipt-splitter/",
+  "checkedAt": "2026-09-12T08:35:55.591Z",
+  "stages": [
+    {
+      "stage": "01-home",
+      "checks": [
+        {
+          "width": 320,
+          "fits": true
+        },
+        {
+          "width": 360,
+          "fits": true
+        },
+        {
+          "width": 375,
+          "fits": true
+        },
+        {
+          "width": 390,
+          "fits": true
+        },
+        {
+          "width": 430,
+          "fits": true
+        },
+        {
+          "width": 1440,
+          "fits": true
+        }
+      ],
+      "accessibility": []
+    },
+    {
+      "stage": "02-capture",
+      "checks": [
+        {
+          "width": 320,
+          "fits": true
+        },
+        {
+          "width": 360,
+          "fits": true
+        },
+        {
+          "width": 375,
+          "fits": true
+        },
+        {
+          "width": 390,
+          "fits": true
+        },
+        {
+          "width": 430,
+          "fits": true
+        },
+        {
+          "width": 1440,
+          "fits": true
+        }
+      ],
+      "accessibility": []
+    },
+    {
+      "stage": "03-review",
+      "checks": [
+        {
+          "width": 320,
+          "fits": true
+        },
+        {
+          "width": 360,
+          "fits": true
+        },
+        {
+          "width": 375,
+          "fits": true
+        },
+        {
+          "width": 390,
+          "fits": true
+        },
+        {
+          "width": 430,
+          "fits": true
+        },
+        {
+          "width": 1440,
+          "fits": true
+        }
+      ],
+      "accessibility": []
+    },
+    {
+      "stage": "04-people",
+      "checks": [
+        {
+          "width": 320,
+          "fits": true
+        },
+        {
+          "width": 360,
+          "fits": true
+        },
+        {
+          "width": 375,
+          "fits": true
+        },
+        {
+          "width": 390,
+          "fits": true
+        },
+        {
+          "width": 430,
+          "fits": true
+        },
+        {
+          "width": 1440,
+          "fits": true
+        }
+      ],
+      "accessibility": []
+    },
+    {
+      "stage": "05-assign",
+      "checks": [
+        {
+          "width": 320,
+          "fits": true
+        },
+        {
+          "width": 360,
+          "fits": true
+        },
+        {
+          "width": 375,
+          "fits": true
+        },
+        {
+          "width": 390,
+          "fits": true
+        },
+        {
+          "width": 430,
+          "fits": true
+        },
+        {
+          "width": 1440,
+          "fits": true
+        }
+      ],
+      "accessibility": []
+    },
+    {
+      "stage": "06-extras",
+      "checks": [
+        {
+          "width": 320,
+          "fits": true
+        },
+        {
+          "width": 360,
+          "fits": true
+        },
+        {
+          "width": 375,
+          "fits": true
+        },
+        {
+          "width": 390,
+          "fits": true
+        },
+        {
+          "width": 430,
+          "fits": true
+        },
+        {
+          "width": 1440,
+          "fits": true
+        }
+      ],
+      "accessibility": []
+    },
+    {
+      "stage": "07-results",
+      "checks": [
+        {
+          "width": 320,
+          "fits": true
+        },
+        {
+          "width": 360,
+          "fits": true
+        },
+        {
+          "width": 375,
+          "fits": true
+        },
+        {
+          "width": 390,
+          "fits": true
+        },
+        {
+          "width": 430,
+          "fits": true
+        },
+        {
+          "width": 1440,
+          "fits": true
+        }
+      ],
+      "accessibility": []
+    },
+    {
+      "stage": "08-share",
+      "checks": [
+        {
+          "width": 320,
+          "fits": true
+        },
+        {
+          "width": 360,
+          "fits": true
+        },
+        {
+          "width": 375,
+          "fits": true
+        },
+        {
+          "width": 390,
+          "fits": true
+        },
+        {
+          "width": 430,
+          "fits": true
+        },
+        {
+          "width": 1440,
+          "fits": true
+        }
+      ],
+      "accessibility": []
+    }
+  ],
+  "errors": [],
+  "download": {
+    "width": 1080,
+    "height": 1390
+  }
+}

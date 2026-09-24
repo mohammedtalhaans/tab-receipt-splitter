@@ -1,0 +1,9 @@
+THE LUNCH COUNTER
+--------------------------------
+Burger                     18.00
+Fries                       9.00
+Soda                        5.00
+SUBTOTAL                   32.00
+Discount                   -4.00
+TOTAL AUD                  28.00
+THANK YOU

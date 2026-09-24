@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#0B0B0C" />
+    <meta name="description" content="Split the receipt. Not the bill equally. Scan locally, tap who ordered what, and settle every cent. Free, private, and open source." />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta name="color-scheme" content="dark light" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; worker-src 'self' blob:; style-src 'self' 'unsafe-inline'; img-src 'self' blob: data:; font-src 'self'; connect-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'none'" />
+    <link rel="icon" type="image/svg+xml" href="%BASE_URL%icons/favicon.svg" />
+    <title>tab — Who ordered what?</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <noscript><main style="max-width:32rem;margin:4rem auto;padding:2rem;font-family:system-ui;color:#F5F0E6;background:#151517"><h1>A little JavaScript. No uploads.</h1><p>tab uses your browser to read receipts and split every cent. Enable JavaScript to use it. No receipt data is sent to a server.</p></main></noscript>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

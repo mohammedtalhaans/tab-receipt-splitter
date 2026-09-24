@@ -1,0 +1,13 @@
+node_modules/
+dist/
+public/ocr/
+public/licenses/
+.env
+.env.local
+.env.*.local
+playwright-report/
+test-results/
+test-results-*/
+coverage/
+.DS_Store
+.qa-preview/

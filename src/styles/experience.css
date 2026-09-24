@@ -1,0 +1,113 @@
+/* Shared usability foundation. Screen-specific refinements live beside this file. */
+:root { --faint: #a39d94; }
+body { font-size: 16px; }
+.page-description { font-size: 15px; line-height: 1.65; max-width: 36rem; }
+.page-heading .eyebrow { font-size: 11px; letter-spacing: .1em; margin-bottom: 14px; }
+.section-label { font-size: 11px; letter-spacing: .065em; }
+.notice strong { font-size: 14px; line-height: 1.5; }
+.notice-body { font-size: 13px; line-height: 1.7; }
+.notice .btn { margin-top: 12px; }
+.field { font-size: 14px; }
+.field-hint, .checkbox-row small { font-size: 12px; line-height: 1.6; }
+.checkbox-row { font-size: 14px; }
+.form-summary { font-size: 14px; }
+.modal-heading p { font-size: 14px; line-height: 1.65; }
+.modal-heading h2 { font-size: 26px; letter-spacing: -.035em; }
+.modal-heading .btn-icon { min-width: 44px; width: 44px; height: 44px; }
+.modal-content { overscroll-behavior: contain; scroll-padding-block: 20px; }
+.modal-positioner.sheet .modal-content { padding-inline: 24px; }
+.btn, .btn-small { font-size: 14px; min-height: 44px; }
+.btn-default { min-height: 52px; }
+.btn-large { min-height: 58px; font-size: 15px; }
+.btn-icon { min-width: 44px; width: 44px; height: 44px; padding: 0; }
+.bottom-action .btn-large { min-height: 58px; font-size: 15px; }
+.action-note { font-size: 12px; line-height: 1.45; margin-bottom: 10px; }
+.privacy-line, .source-link { font-size: 12px; min-height: 44px; }
+.quiet-details summary { min-height: 44px; align-content: center; }
+.quiet-details > p { font-size: 13px; }
+.toast { font-size: 14px; max-width: min(520px, calc(100vw - 32px)); pointer-events: none; }
+.about-content p { font-size: 14px; line-height: 1.75; }
+.about-content .about-footnote { font-size: 12px; }
+.privacy-facts { font-size: 12px; }
+.home-entry-options { margin-top: 12px; }
+.home-resume { margin-top: 26px; padding: 20px; border: 1px solid #484334; background: #1b1b15; border-radius: 18px; display: grid; gap: 10px; }
+.home-resume > span { color: var(--muted); font-size: 13px; }
+.home-resume > strong { font-size: 18px; overflow-wrap: anywhere; }
+.home-resume > .home-manual { justify-content: center; }
+.home-entry-options > span { display: block; color: var(--muted); font-size: 12px; }
+.home-manual { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; font-size: 13px; color: var(--paper); padding: 4px 0; }
+.home-manual:hover { color: var(--thermal-bright); }
+.home-privacy { margin-top: 12px; }
+.home-privacy > span { font-size: 12px; }
+.home-eyebrow { font-size: 11px; }
+.home-actions .btn { min-height: 60px; font-size: 15px; }
+.home-bottom p, .home-bottom .source-link { font-size: 12px; }
+.header-privacy { font-size: 10px; }
+.flow-steps li { font-size: 14px; height: auto; min-height: 56px; }
+.flow-steps li::after { pointer-events: none; }
+.flow-step-control { display: flex; align-items: center; gap: 13px; width: 100%; text-align: left; min-height: 52px; padding: 4px 8px 4px 0; border-radius: 12px; }
+.flow-step-control:disabled { cursor: default; }
+.flow-step-control:not(:disabled):hover { color: var(--paper); background: var(--elevated); }
+.flow-steps li.current .flow-step-control { color: var(--paper); }
+.flow-step-number { flex-shrink: 0; width: 30px; height: 30px; font-size: 10px; }
+.aside-note > span { font-size: 10px; letter-spacing: .04em; }
+.aside-privacy { font-size: 13px; }
+.aside-privacy small { font-size: 12px; }
+.header-step-name { display: none; }
+.mobile-step-picker { display: none; }
+
+@media (max-width: 959px) {
+  .home-copy { display: contents; }
+  .home-copy > div:first-child { grid-row: 1; }
+  .home-copy h1 { font-size: clamp(48px, 13.5vw, 76px); }
+  .home-eyebrow { font-size: 10px; letter-spacing: .08em; }
+  .home-description { font-size: 16px; line-height: 1.65; }
+  .home-actions { grid-row: 2; margin-top: 26px; }
+  .home-resume { grid-row: 2 / 4; }
+  .home-actions .btn { font-size: 15px; gap: 8px; padding: 14px 12px; }
+  .home-entry-options { grid-row: 3; text-align: center; margin-top: 12px; }
+  .home-entry-options > span { font-size: 12px; }
+  .home-privacy { grid-row: 4; margin-top: 4px; }
+  .home-privacy .privacy-line { font-size: 12px; min-height: 44px; }
+  .home-privacy > span { font-size: 12px; }
+  .hero-visual { grid-row: 5; margin-top: 30px; }
+  .home-bottom { grid-row: 6; margin-top: 20px; }
+  .page-heading h1 { font-size: clamp(36px, 9.5vw, 48px); }
+  .page-description { font-size: 15px; margin-top: 14px; }
+  .page-heading .eyebrow { font-size: 10px; }
+  .page-heading { margin-bottom: 24px; }
+  .section-label { font-size: 10px; }
+  .bottom-action { padding-top: 20px; }
+  .bottom-action .btn-large { font-size: 14px; }
+  .action-note { font-size: 12px; }
+  .in-flow .stage-screen { padding-bottom: calc(155px + var(--safe-bottom)); }
+  .in-flow .header-step { display: none; }
+  .mobile-step-picker { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; min-height: 44px; padding: 4px 0 4px 8px; margin-left: auto; }
+  .mobile-step-picker > span { font-size: 13px; font-weight: 650; }
+  .mobile-step-picker small { display: flex; align-items: center; gap: 6px; color: var(--muted); font: 400 10px var(--mono); }
+  .step-menu { display: grid; gap: 5px; }
+  .step-menu .flow-step-control { gap: 14px; font-size: 15px; padding: 10px; min-height: 56px; }
+  .step-menu .flow-step-control:disabled { opacity: .5; }
+  .step-menu .flow-step-control[aria-current=step] { background: var(--thermal-dim); color: var(--thermal-bright); opacity: 1; }
+  .step-menu .flow-step-control > svg { margin-left: auto; }
+}
+@media (max-width: 359px) {
+  .home-actions .btn { font-size: 13px; gap: 6px; padding-inline: 9px; }
+  .home-actions .btn > svg { width: 17px; }
+  .home-eyebrow { font-size: 9px; }
+  .home-description { font-size: 15px; }
+  .home-privacy .privacy-line { font-size: 11px; }
+  .mobile-step-picker > span { font-size: 12px; }
+  .in-flow .brand { font-size: 25px; }
+  .header-start { gap: 2px; }
+  .app-header { gap: 6px; padding-inline: 16px; }
+  .modal-positioner.sheet .modal-content { padding-inline: 18px; }
+  .modal-heading h2 { font-size: 24px; }
+}
+@media (max-height: 600px) {
+  .modal-positioner { padding: 12px; }
+  .modal-content { max-height: calc(100dvh - 24px); }
+  .modal-positioner.sheet .modal-content { max-height: calc(100dvh - 12px); }
+  .bottom-action { padding-top: 12px; padding-bottom: calc(10px + var(--safe-bottom)); }
+}
+@media (prefers-reduced-motion: reduce) { .home-manual, .flow-step-control { transition: none; } }

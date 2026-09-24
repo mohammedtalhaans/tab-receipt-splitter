@@ -1,0 +1,115 @@
+{
+  "engine": "native Tesseract 5.5.0 CLI, NOT Tesseract.js",
+  "preprocessing": "Generated PNG directly, PSM 6; app preprocessing not exercised",
+  "results": [
+    {
+      "fixture": "clean",
+      "itemCount": 10,
+      "detectedTotal": 22550,
+      "reconciliation": {
+        "calculated": 22550,
+        "expected": 22550,
+        "difference": 0,
+        "matched": true
+      },
+      "warnings": []
+    },
+    {
+      "fixture": "angled",
+      "itemCount": 10,
+      "detectedTotal": 22550,
+      "reconciliation": {
+        "calculated": 22550,
+        "expected": 22550,
+        "difference": 0,
+        "matched": true
+      },
+      "warnings": []
+    },
+    {
+      "fixture": "dim",
+      "itemCount": 10,
+      "detectedTotal": null,
+      "reconciliation": {
+        "calculated": 22550,
+        "difference": null,
+        "matched": false
+      },
+      "warnings": [
+        "No final total was found. Enter the printed total or confirm the calculated one."
+      ]
+    },
+    {
+      "fixture": "crumpled",
+      "itemCount": 10,
+      "detectedTotal": 22550,
+      "reconciliation": {
+        "calculated": 22558,
+        "expected": 22550,
+        "difference": 8,
+        "matched": false
+      },
+      "warnings": []
+    },
+    {
+      "fixture": "small-font",
+      "itemCount": 10,
+      "detectedTotal": 22550,
+      "reconciliation": {
+        "calculated": 22550,
+        "expected": 22550,
+        "difference": 0,
+        "matched": true
+      },
+      "warnings": []
+    },
+    {
+      "fixture": "service-charge",
+      "itemCount": 10,
+      "detectedTotal": 22550,
+      "reconciliation": {
+        "calculated": 22550,
+        "expected": 22550,
+        "difference": 0,
+        "matched": true
+      },
+      "warnings": []
+    },
+    {
+      "fixture": "discount",
+      "itemCount": 3,
+      "detectedTotal": 2800,
+      "reconciliation": {
+        "calculated": 2800,
+        "expected": 2800,
+        "difference": 0,
+        "matched": true
+      },
+      "warnings": []
+    },
+    {
+      "fixture": "quantities",
+      "itemCount": 3,
+      "detectedTotal": 3600,
+      "reconciliation": {
+        "calculated": 3600,
+        "expected": 3600,
+        "difference": 0,
+        "matched": true
+      },
+      "warnings": []
+    },
+    {
+      "fixture": "long",
+      "itemCount": 24,
+      "detectedTotal": 7920,
+      "reconciliation": {
+        "calculated": 7920,
+        "expected": 7920,
+        "difference": 0,
+        "matched": true
+      },
+      "warnings": []
+    }
+  ]
+}

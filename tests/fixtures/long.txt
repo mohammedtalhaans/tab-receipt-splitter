@@ -1,0 +1,30 @@
+THE LONG TABLE
+--------------------------------
+Coffee 01                   3.00
+Coffee 02                   3.00
+Coffee 03                   3.00
+Coffee 04                   3.00
+Coffee 05                   3.00
+Coffee 06                   3.00
+Coffee 07                   3.00
+Coffee 08                   3.00
+Coffee 09                   3.00
+Coffee 10                   3.00
+Coffee 11                   3.00
+Coffee 12                   3.00
+Coffee 13                   3.00
+Coffee 14                   3.00
+Coffee 15                   3.00
+Coffee 16                   3.00
+Coffee 17                   3.00
+Coffee 18                   3.00
+Coffee 19                   3.00
+Coffee 20                   3.00
+Coffee 21                   3.00
+Coffee 22                   3.00
+Coffee 23                   3.00
+Coffee 24                   3.00
+SUBTOTAL                   72.00
+Service charge              7.20
+TOTAL AUD                  79.20
+THANK YOU
