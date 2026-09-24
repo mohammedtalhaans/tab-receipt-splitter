@@ -100,7 +100,7 @@ function Shell() {
     dispatch({ type: 'GO', stage });
   };
 
-  return <div className={`app-root ${isHome ? 'at-home' : 'in-flow'}`}>
+  return <div className={`app-root ${isHome ? 'at-home' : 'in-flow'} ${state.stage === 'results' ? 'with-link-actions' : ''}`}>
     <a className="skip-link" href={readOnlyShared ? undefined : '#main-content'} tabIndex={readOnlyShared ? 0 : undefined} role={readOnlyShared ? 'link' : undefined} onClick={readOnlyShared ? event => { event.preventDefault(); document.getElementById('main-content')?.focus(); } : undefined}>Skip to the app</a>
     <header className="app-header">
       <div className="header-start">

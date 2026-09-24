@@ -61,6 +61,7 @@ body { font-size: 16px; }
 .shared-view-header { margin-left: auto; color: var(--muted); font-size: 12px; }
 .skip-link[role="link"] { cursor: pointer; }
 .app-main:focus { outline: none; }
+.with-link-actions .stage-screen[data-stage="results"] { padding-bottom: calc(250px + var(--safe-bottom)); }
 
 @media (max-width: 959px) {
   .home-copy { display: contents; }

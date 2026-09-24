@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
-import { Check, ChevronDown, Share2, Copy, Download, ArrowLeft, RotateCcw, ArrowUpRight, ListCollapse, ListPlus } from 'lucide-react';
+import { Check, ChevronDown, Share2, Copy, Download, ArrowLeft, RotateCcw, ArrowUpRight, ListCollapse, ListPlus, Link2 } from 'lucide-react';
 import { useApp } from '../context.tsx';
 import { NumberTicker } from '../../components/magic/number-ticker.tsx';
 import { CompletionBurst } from '../../components/magic/confetti.tsx';
@@ -9,6 +9,7 @@ import { Button } from '../../components/ui/button.tsx';
 import { Avatar, BottomAction, SourceLink, Notice } from '../../components/ui/common.tsx';
 import { Modal } from '../../components/ui/modal.tsx';
 import { buildSummary, copySummary } from '../../features/sharing/summary.ts';
+import { createShareLink } from '../../features/sharing/share-link.ts';
 import { formatMoney } from '../../lib/money.ts';
 import { receiptLineReveal, resultReveal, softSpring } from '../../lib/motion.ts';
 import '../../styles/results-polish.css';
@@ -20,7 +21,8 @@ export default function Results() {
   const [shareOpen, setShareOpen] = useState(false);
   const [intent, setIntent] = useState<'share' | 'save'>('share');
   const [complete, setComplete] = useState(false);
-  const [manualCopy, setManualCopy] = useState(false);
+  const [manualCopyKind, setManualCopyKind] = useState<'summary' | 'link' | null>(null);
+  const [shareLinkText, setShareLinkText] = useState('');
   const [copied, setCopied] = useState(false);
   const copyField = useRef<HTMLTextAreaElement>(null);
 
@@ -40,7 +42,20 @@ export default function Results() {
     if (await copySummary(text)) {
       setCopied(true);
       notify('Summary copied. Dinner, dealt with.');
-    } else setManualCopy(true);
+    } else setManualCopyKind('summary');
+  };
+
+  const copyLink = async () => {
+    try {
+      const link = createShareLink(state, split, window.location.href);
+      setShareLinkText(link);
+      if (await copySummary(link)) {
+        setManualCopyKind(null);
+        notify('Share link copied. Anyone with the link can see the item details.');
+      } else setManualCopyKind('link');
+    } catch (error) {
+      notify(error instanceof Error ? error.message : 'The share link could not be created.');
+    }
   };
 
   const openShare = (value: 'share' | 'save') => {
@@ -188,19 +203,25 @@ export default function Results() {
     <Button variant="ghost" className="fill new-split" onClick={() => setResetOpen(true)}>
       <RotateCcw size={15} />Start a fresh split</Button>
     <BottomAction>
+      <div className="result-share-actions-stack">
       <Button size="large" onClick={() => openShare('share')}>
         <Share2 size={20} />Share results<ArrowUpRight size={20} className="button-end" />
       </Button>
+        <Button className="result-copy-link-button" variant="secondary" onClick={() => void copyLink()}>
+          <Link2 size={17} />Copy share link
+        </Button>
+        <p className="result-copy-link-note">Anyone with the link can see participant names, items and amounts. The receipt photo is not included.</p>
+      </div>
     </BottomAction>
     <CompletionBurst fire={complete && split.reconciled} />
     <ShareSheet open={shareOpen} onOpenChange={setShareOpen} intent={intent} />
-    <Modal open={manualCopy} onOpenChange={setManualCopy} title="Ready to copy." description="This browser couldn’t access the clipboard. Select and copy the text instead." onOpenAutoFocus={event => {
+    <Modal open={manualCopyKind !== null} onOpenChange={open => { if (!open) setManualCopyKind(null); }} title={manualCopyKind === 'link' ? 'Copy your share link.' : 'Ready to copy.'} description={manualCopyKind === 'link' ? 'Anyone with this link can see the names, items and amounts in this split. It is not encrypted or revocable.' : 'This browser couldn’t access the clipboard. Select and copy the text instead.'} onOpenAutoFocus={event => {
       event.preventDefault();
       copyField.current?.focus();
       copyField.current?.select();
     }}>
-      <textarea ref={copyField} readOnly value={text} rows={12} aria-label="Split summary to copy" />
-      <Button variant="ghost" className="fill" onClick={() => setManualCopy(false)}>
+      <textarea ref={copyField} readOnly value={manualCopyKind === 'link' ? shareLinkText : text} rows={manualCopyKind === 'link' ? 4 : 12} aria-label={manualCopyKind === 'link' ? 'Share link to copy' : 'Split summary to copy'} />
+      <Button variant="ghost" className="fill" onClick={() => setManualCopyKind(null)}>
         <ArrowLeft size={16} />Back to the table</Button>
     </Modal>
   </div>;

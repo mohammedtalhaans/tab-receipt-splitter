@@ -41,6 +41,10 @@
 .results-screen .result-paper-footer > span { font-size: 9px; line-height: 1.5; }
 .results-screen .result-share-secondary { gap: 10px; }
 .results-screen .result-share-secondary .btn { font-size: 13px; }
+.result-share-actions-stack { display:grid; width:100%; gap:8px; }
+.result-share-actions-stack > .btn { width:100%; }
+.result-share-actions-stack > .result-copy-link-button { min-height:48px; font-size:13px; }
+.result-share-actions-stack > .result-copy-link-note { max-width:540px; margin:0 auto 2px; text-align:center; color:var(--muted); font-size:11px; line-height:1.45; }
 
 .share-modal { max-width: 500px; }
 .share-modal .modal-heading { margin-bottom: 12px; }
