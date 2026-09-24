@@ -110,7 +110,7 @@ export function ShareSheet({ open, onOpenChange, intent = 'share' }: {
       let canShareFile = false;
       try { canShareFile = !!file && !!navigator.canShare?.({ files: [file] }); }
       catch { /* A browser may expose canShare without accepting file queries. Text still works. */ }
-      const linkText = shareLink ? 'Open the complete item-by-item split.' : text;
+      const linkText = shareLink ? `${formatMoney(split!.total, state.receipt.currency)} sorted with ${config.brand}.` : text;
       const data: ShareData = canShareFile && file
         ? { files: [file], title: state.receipt.label, text: linkText, ...(shareLink ? { url: shareLink } : {}) }
         : { title: state.receipt.label, text: linkText, ...(shareLink ? { url: shareLink } : {}) };

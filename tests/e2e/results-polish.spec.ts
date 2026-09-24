@@ -51,11 +51,11 @@ test('a failed image can share text and retry without losing the split', async (
   await page.getByRole('button', { name: 'Share results', exact: true }).click();
   await expect(page.getByText('The text summary is ready.')).toBeVisible();
   await expect(page.locator('.receipt-skeleton')).toHaveCount(0);
-  await page.getByRole('button', { name: 'Share text summary', exact: true }).click();
+  await page.getByRole('button', { name: 'Share link', exact: true }).click();
   await expect(page.locator('html')).toHaveAttribute('data-shared-text', /256\.25/);
   await page.getByRole('button', { name: 'Try creating the image again' }).click();
   await expect(page.locator('.share-card-preview img')).toBeVisible();
-  await expect(page.getByRole('button', { name: 'Share with the table' })).toBeEnabled();
+  await expect(page.getByRole('button', { name: 'Share link', exact: true })).toBeEnabled();
 });
 
 test('native share cancellation is quiet and a failure keeps save and copy available', async ({ page }) => {
@@ -70,7 +70,7 @@ test('native share cancellation is quiet and a failure keeps save and copy avail
   });
   await demoResults(page);
   await page.getByRole('button', { name: 'Share results', exact: true }).click();
-  const share = page.getByRole('button', { name: 'Share with the table' });
+  const share = page.getByRole('button', { name: 'Share link', exact: true });
   await share.click();
   await expect(share).toBeEnabled();
   await expect(page.locator('.share-modal .notice')).toHaveCount(0);
