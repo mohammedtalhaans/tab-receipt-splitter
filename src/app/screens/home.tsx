@@ -2,15 +2,16 @@ import { ArrowRight, Camera, ScanLine, PenLine } from 'lucide-react';
 import { motion, useReducedMotion } from 'motion/react';
 import { useApp } from '../context.tsx';
 import { Button } from '../../components/ui/button.tsx';
-import { PrivacyLine, SourceLink } from '../../components/ui/common.tsx';
+import { Notice, PrivacyLine, SourceLink } from '../../components/ui/common.tsx';
 import { HeroReceipt } from '../../components/receipt/hero-receipt.tsx';
 import { screenTransition } from '../../lib/motion.ts';
 export default function Home() {
 
-  const { scanner, dispatch, state, setResetOpen } = useApp();
+  const { scanner, dispatch, state, setResetOpen, shareLinkError, dismissShareLinkError } = useApp();
   const reduced = useReducedMotion();
 
   return <div className="home-screen">
+    {shareLinkError && <Notice kind="warning" title="This split link couldn’t be opened." action={<Button variant="ghost" onClick={dismissShareLinkError}>Continue without it</Button>}><p>{shareLinkError}</p></Notice>}
     <div className="home-copy">
       <motion.div initial={{ opacity: 0, y: reduced ? 0 : 10 }} animate={{ opacity: 1, y: 0 }} transition={screenTransition}>
         <div className="eyebrow home-eyebrow">

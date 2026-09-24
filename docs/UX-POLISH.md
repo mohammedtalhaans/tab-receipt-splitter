@@ -25,6 +25,7 @@ The design avoids an unrelated visual redesign: more decoration would compete wi
 - Repeated manual entry, focused error correction, amount-limit checks, prominent printed totals, zoomable photo comparison, and review-needed filtering reduce correction work.
 - Item search, a stable claim queue, keyboard-friendly Find next, a searchable picker for large tables, and participant-removal Undo make assignment manageable.
 - Results expose named charges and each person's subtotal/extras/total. Sharing handles image failure, retry, denied clipboard, native share cancellation and download fallbacks.
+- **Copy share link** encodes a bounded, versioned split snapshot in the URL fragment. Recipients see the same recalculated result in a read-only view; the URL needs no account or backend and contains no receipt image or OCR text. The share panel warns that anyone with the unencrypted, non-revocable link can read its contents.
 - Large names wrap in the exported card. Large-table previews scroll at a readable width.
 - Tailwind scans app source only, so temporary test artifacts and documentation cannot alter the stylesheet. This follows [Tailwind's explicit source guidance](https://tailwindcss.com/docs/detecting-classes-in-source-files).
 

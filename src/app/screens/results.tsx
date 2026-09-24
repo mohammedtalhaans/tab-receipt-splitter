@@ -14,7 +14,7 @@ import { receiptLineReveal, resultReveal, softSpring } from '../../lib/motion.ts
 import '../../styles/results-polish.css';
 export default function Results() {
 
-  const { state, dispatch, split, notify, setResetOpen } = useApp();
+  const { state, dispatch, split, notify, setResetOpen, readOnlyShared } = useApp();
   const reduced = useReducedMotion();
   const [expanded, setExpanded] = useState<string[]>([]);
   const [shareOpen, setShareOpen] = useState(false);
@@ -50,7 +50,7 @@ export default function Results() {
 
   return <div className="results-screen">
     <div className="result-kicker">
-      <span className="eyebrow">06 / DINNER, DEALT WITH.</span>
+      <span className="eyebrow">{readOnlyShared ? 'SHARED SPLIT · VIEW ONLY' : '06 / DINNER, DEALT WITH.'}</span>
       <span className="result-currency mono">
         {state.receipt.currency}
       </span>
@@ -64,7 +64,7 @@ export default function Results() {
           <motion.path d="M 8 28 L 23 43 L 52 9" initial={{ pathLength: reduced ? 1 : 0 }} animate={{ pathLength: 1 }} transition={{ delay: reduced ? 0 : .72, duration: .24 }} />
         </motion.svg>
       </h1>
-      <p>Good company. Fair shares. Not a cent left over.</p>
+      <p>{readOnlyShared ? 'Tap a name to see the items in each share.' : 'Good company. Fair shares. Not a cent left over.'}</p>
     </motion.div>
     <motion.section layoutId={shareOpen ? undefined : 'final-receipt'} className="result-receipt receipt-paper" style={{ visibility: shareOpen ? 'hidden' : 'visible' }} initial="hidden" animate="visible" variants={reduced ? undefined : resultReveal}>
       <div className="result-receipt-top">

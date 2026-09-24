@@ -18,8 +18,19 @@ export function useFlowNavigation() {
   const collapsingReset = useRef(false);
 
   useEffect(() => {
-    history.replaceState({ tabFlow: { session: session.current, stage: 'home', index: 0 } }, '');
+    const firstStage: AppStage = latest.current.readOnlyShared ? 'results' : 'home';
+    history.replaceState({ tabFlow: { session: session.current, stage: firstStage, index: 0 } }, '');
     const pop = (event: PopStateEvent) => {
+      // A shared link is a read-only snapshot. Browser Back leaves it as a document.
+      if (latest.current.readOnlyShared) {
+        if (latest.current.dismissOverlay()) {
+          const position = event.state?.tabFlow as Position | undefined;
+          const previousIndex = position?.session === session.current && Number.isInteger(position.index) ? position.index : 0;
+          const delta = index.current - previousIndex;
+          if (delta) { restoringOverlay.current = true; history.go(delta); }
+        }
+        return;
+      }
       if (collapsingReset.current) {
         collapsingReset.current = false;
         history.replaceState({ tabFlow: { session: session.current, stage: 'home', index: 0 } }, '');

@@ -2,7 +2,7 @@
 
 ## Boundaries
 
-This app owns no server endpoint. Photos, extracted text, people, and assignments are processed in browser memory. Static assets are fetched from the deployment origin. Explicit share/save actions may hand a generated summary to the browser, operating system, filesystem, or selected share destination. The destination is outside this app's privacy boundary.
+This app owns no server endpoint. Photos, extracted text, people, and assignments are processed in browser memory. Static assets are fetched from the deployment origin. Explicit share/save actions may hand a generated summary to the browser, operating system, filesystem, or selected share destination. A deliberately created `#tab-split=` URL embeds names, items, claims and amounts in its fragment; the app decodes and validates it on the recipient's device. The fragment is not sent in an HTTP request. The URL is not encrypted, does not expire, and cannot be revoked by the app, so anyone who receives it can read the split. The receipt image and OCR text are excluded. A user-selected messaging/share destination is outside this app's privacy boundary.
 
 The app makes no promise against a compromised browser, operating system, extension, maliciously modified deployment, device screenshots, or forensic memory recovery. Do not use it for receipts you cannot safely process on the current device. Verify the deployed source and maintain dependencies.
 

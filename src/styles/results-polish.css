@@ -64,6 +64,7 @@
 .share-modal .share-image-error p { font-size: 13px; line-height: 1.5; color: var(--muted); margin: 0; }
 .share-modal .share-image-error .btn { width: 100%; white-space: normal; }
 .share-modal .share-preview-help, .share-modal .share-browser-note, .share-modal .share-download-help { color: var(--muted); font-size: 12px; line-height: 1.6; margin: 10px 0 0; }
+.share-modal .share-link-limit { color: var(--warning); font-size: 13px; line-height: 1.6; margin: 10px 0; }
 .share-modal .share-download-help { color: var(--success); }
 .share-modal .share-privacy { font-size: 11px; line-height: 1.6; align-items: flex-start; margin-top: 20px; }
 .share-modal .share-privacy svg { flex: 0 0 15px; margin-top: 1px; }

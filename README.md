@@ -23,7 +23,7 @@ Photograph the receipt, tap who ordered each item, and settle every cent.
 
 The bill just came. One friend had a salad. Another had steak. The fries were for the table. An equal split isn’t an honest split.
 
-**Scan → check → people → claim → extras → sorted.** A narrow scanner reads the receipt on the device. Extracted items turn into editable thermal-paper cards. Tap names directly on each item; shared amounts and each person’s running subtotal respond immediately. The result becomes a locally rendered share card.
+**Scan → check → people → claim → extras → sorted.** A narrow scanner reads the receipt on the device. Extracted items turn into editable thermal-paper cards. Tap names directly on each item; shared amounts and each person’s running subtotal respond immediately. Results include a share card and an optional link that opens the exact split in a read-only browser view.
 
 | One moment | What tab does |
 | --- | --- |
@@ -46,7 +46,7 @@ Images, names, items, assignments, and results live in memory. Refreshing or cho
 
 This is not a promise of zero network traffic. HTML, JavaScript, bundled fonts, English OCR data, and WebAssembly are static downloads. The production build hosts them on the **same origin**. It does not call an OCR CDN. Browser HTTP caching of public static assets is distinct from storing a receipt.
 
-Sharing is explicit. PNGs and text summaries contain the dinner label, participant names, and amounts—not the original photo or item details. Choosing a native share target hands the selected summary to your browser/operating system; that destination may transmit it when you send it.
+Sharing is explicit. A PNG or text summary includes participant totals, and no receipt photo. **Copy share link** creates a read-only browser view with participant names, every item and its claimant, receipt charges, tip, currency, and calculated split. The compact snapshot stays in the URL fragment: GitHub Pages serves the app, which decodes and recalculates the split in the recipient’s browser. There is no API or backend. Anyone with the full link can see the embedded details, so it is not private, encrypted, expiring, or revocable. The receipt photo and OCR text are not in the link. A share link and any copied image, text, or native share are sent only after a person chooses an action in the sharing panel.
 
 See [architecture and threat boundaries](docs/ARCHITECTURE.md) and [security reporting](SECURITY.md).
 
@@ -71,7 +71,7 @@ src/
     ocr/                lazy reader, preprocessing worker, cancellation
     parser/             deterministic receipt extraction
     splitting/          integer money and exact allocation
-    sharing/            local Canvas PNG + text summary
+    sharing/            view-only share links + local Canvas PNG and text summary
   lib/                  configuration, money formatting, motion presets
   styles/               tokens, texture, responsive and reduced-motion rules
   test-data/            explicit synthetic demo data

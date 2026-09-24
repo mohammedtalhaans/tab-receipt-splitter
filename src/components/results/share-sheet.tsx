@@ -1,7 +1,7 @@
 import { config } from '../../lib/config.ts';
 import { useEffect, useRef, useState } from 'react';
 import { motion } from 'motion/react';
-import { Share2, Download, Copy, Check, ShieldCheck, ExternalLink, RotateCcw, ImageOff } from 'lucide-react';
+import { Share2, Download, Copy, Check, ShieldCheck, ExternalLink, RotateCcw, ImageOff, Link2 } from 'lucide-react';
 import { useApp } from '../../app/context.tsx';
 import { Modal } from '../ui/modal.tsx';
 import { Button } from '../ui/button.tsx';
@@ -9,6 +9,7 @@ import { ReceiptSkeleton } from '../ui/skeleton.tsx';
 import { Notice } from '../ui/common.tsx';
 import { buildSummary, copySummary, downloadImage } from '../../features/sharing/summary.ts';
 import { formatMoney } from '../../lib/money.ts';
+import { createShareLink } from '../../features/sharing/share-link.ts';
 
 export function ShareSheet({ open, onOpenChange, intent = 'share' }: {
   open: boolean;
@@ -16,13 +17,15 @@ export function ShareSheet({ open, onOpenChange, intent = 'share' }: {
   intent?: 'share' | 'save'
 }) {
   const { split, state, notify } = useApp();
+  const [shareLink, setShareLink] = useState<string | null>(null);
+  const [shareLinkError, setShareLinkError] = useState('');
   const [url, setUrl] = useState<string | null>(null);
   const [blob, setBlob] = useState<Blob | null>(null);
   const [imageError, setImageError] = useState('');
   const [actionError, setActionError] = useState('');
   const [busy, setBusy] = useState(false);
   const [copied, setCopied] = useState(false);
-  const [manualCopy, setManualCopy] = useState(false);
+  const [manualCopyKind, setManualCopyKind] = useState<'link' | 'summary' | null>(null);
   const [attempt, setAttempt] = useState(0);
   const [downloadRequested, setDownloadRequested] = useState(false);
   const copyField = useRef<HTMLTextAreaElement>(null);
@@ -36,9 +39,17 @@ export function ShareSheet({ open, onOpenChange, intent = 'share' }: {
     setImageError('');
     setActionError('');
     setCopied(false);
-    setManualCopy(false);
+    setManualCopyKind(null);
     setBusy(false);
     setDownloadRequested(false);
+    setShareLink(null);
+    setShareLinkError('');
+
+    try {
+      setShareLink(createShareLink(state, split, window.location.href));
+    } catch (error) {
+      setShareLinkError(error instanceof Error ? error.message : 'This split could not fit in a link.');
+    }
 
     void import('../../features/sharing/export-image.ts')
       .then(module => module.createShareImage(state.receipt.label, state.receipt.currency, split))
@@ -58,22 +69,35 @@ export function ShareSheet({ open, onOpenChange, intent = 'share' }: {
   }, [open, split, state.receipt.label, state.receipt.currency, attempt]);
 
   useEffect(() => {
-    if (manualCopy) {
+    if (manualCopyKind) {
       copyField.current?.focus();
       copyField.current?.select();
     }
-  }, [manualCopy]);
+  }, [manualCopyKind]);
 
   if (!split) return null;
   const text = buildSummary(state.receipt.label, state.receipt.currency, split);
   const hasNativeShare = typeof navigator.share === 'function';
 
   async function copy() {
+    setActionError('');
     if (await copySummary(text)) {
       setCopied(true);
-      setManualCopy(false);
+      setManualCopyKind(null);
       notify('Summary copied. Send it to the table.');
-    } else setManualCopy(true);
+    } else setManualCopyKind('summary');
+  }
+
+  async function copyLink() {
+    if (!shareLink) return;
+    setActionError('');
+    if (await copySummary(shareLink)) {
+      setManualCopyKind(null);
+      notify('Split link copied. Anyone with it can see the item details.');
+    } else {
+      setActionError('This browser could not copy the link. Select it below to copy it yourself.');
+      setManualCopyKind('link');
+    }
   }
 
   // Prepare the file before the click; native share needs that click's user activation.
@@ -86,13 +110,14 @@ export function ShareSheet({ open, onOpenChange, intent = 'share' }: {
       let canShareFile = false;
       try { canShareFile = !!file && !!navigator.canShare?.({ files: [file] }); }
       catch { /* A browser may expose canShare without accepting file queries. Text still works. */ }
+      const linkText = shareLink ? 'Open the complete item-by-item split.' : text;
       const data: ShareData = canShareFile && file
-        ? { files: [file], title: state.receipt.label, text: `${formatMoney(split!.total, state.receipt.currency)} sorted with ${config.brand}.` }
-        : { title: state.receipt.label, text };
+        ? { files: [file], title: state.receipt.label, text: linkText, ...(shareLink ? { url: shareLink } : {}) }
+        : { title: state.receipt.label, text: linkText, ...(shareLink ? { url: shareLink } : {}) };
       await navigator.share(data);
     } catch (error) {
       if (!(error && typeof error === 'object' && 'name' in error && error.name === 'AbortError')) {
-        setActionError('Sharing did not open. You can save the image or copy the summary below.');
+        setActionError('Sharing did not open. Copy the split link, save the image or copy the summary.');
       }
     } finally { setBusy(false); }
   }
@@ -109,13 +134,16 @@ export function ShareSheet({ open, onOpenChange, intent = 'share' }: {
     }
   }
 
-  return <Modal open={open} onOpenChange={onOpenChange} title={intent === 'save' ? 'Keep a copy.' : 'Pass it around.'} description="Names, amounts and the table total. Your receipt photo and item details stay private." className="share-modal">
+  return <Modal open={open} onOpenChange={onOpenChange} title={intent === 'save' ? 'Keep a copy.' : 'Pass it around.'} description="The link includes participant names, receipt items and amounts. Anyone with it can view those details, so treat it like a forwarded message. It contains no photo and can’t be revoked." className="share-modal">
     <div className="share-summary-strip"><span>{split.people.length} {split.people.length === 1 ? 'person' : 'people'} · {state.receipt.currency}</span><strong>{formatMoney(split.total, state.receipt.currency)}</strong></div>
     {actionError && <Notice kind="warning" title={actionError} />}
     <div className="share-actions">
-      {intent === 'share' && hasNativeShare && <Button size="large" disabled={busy || (!blob && !imageError)} onClick={() => void share()}>
-        <Share2 size={19} />{busy ? 'Opening share…' : !blob && !imageError ? 'Making your share card…' : imageError ? 'Share text summary' : 'Share with the table'}
+      {intent === 'share' && hasNativeShare && <Button size="large" disabled={busy || !shareLink} onClick={() => void share()}>
+        <Share2 size={19} />{busy ? 'Opening share…' : 'Share link'}
       </Button>}
+      <Button size={intent === 'share' && !hasNativeShare ? 'large' : 'default'} variant={intent === 'share' && !hasNativeShare ? 'primary' : 'secondary'} aria-describedby={shareLinkError ? 'share-link-error' : undefined} disabled={!shareLink || busy} onClick={() => void copyLink()}>
+        <Link2 size={18} />{shareLinkError ? 'Link unavailable' : 'Copy share link'}
+      </Button>
       <Button size={intent === 'save' || !hasNativeShare ? 'large' : 'default'} variant={intent === 'save' || !hasNativeShare ? 'primary' : 'secondary'} disabled={!url || busy} onClick={save}>
         <Download size={18} />{url ? 'Save image' : imageError ? 'Image unavailable' : 'Preparing image…'}
       </Button>
@@ -124,10 +152,11 @@ export function ShareSheet({ open, onOpenChange, intent = 'share' }: {
       </Button>
     </div>
     {downloadRequested && <p className="share-download-help" role="status">Look in Downloads. On a phone, you can also open the image below and save it to Photos.</p>}
-    {manualCopy && <label className="field">Select and copy this summary<textarea ref={copyField} aria-label="Split summary to copy" value={text} readOnly rows={8} />
+    {shareLinkError && <p id="share-link-error" className="share-link-limit">{shareLinkError} You can still save the share image or copy the text summary.</p>}
+    {manualCopyKind && <label className="field">Select and copy the {manualCopyKind === 'link' ? 'split link' : 'summary'}<textarea ref={copyField} aria-label={manualCopyKind === 'link' ? 'Share link to copy' : 'Split summary to copy'} value={manualCopyKind === 'link' ? shareLink ?? '' : text} readOnly rows={manualCopyKind === 'link' ? 4 : 8} />
       <small className="field-hint">Press and hold to select, or use Ctrl/Cmd + C.</small>
     </label>}
-    {!hasNativeShare && <p className="share-browser-note">Save the image or copy the text, then send it in your group chat.</p>}
+    {!hasNativeShare && <p className="share-browser-note">Copy the link to open the full split in a browser. You can also save the image or copy the summary.</p>}
     <div className="share-preview-heading"><span>YOUR SHARE CARD</span>{url && <a href={url} target="_blank" rel="noopener noreferrer">Open full image<ExternalLink size={14} /></a>}</div>
     <motion.div layoutId="final-receipt" className={`share-card-preview${imageError ? ' has-error' : ''}`} tabIndex={url ? 0 : undefined} role={url ? 'region' : undefined} aria-label={url ? 'Share card preview. Scroll to see the whole image.' : undefined}>
       {url ? <img src={url} alt={`Share card for ${state.receipt.label}: ${formatMoney(split.total, state.receipt.currency)}, split between ${split.people.length} ${split.people.length === 1 ? 'person' : 'people'}.`} /> : imageError ? <div className="share-image-error"><ImageOff size={28} /><strong>The text summary is ready.</strong><p>{imageError}</p><Button variant="secondary" onClick={() => setAttempt(value => value + 1)}><RotateCcw size={16} />Try creating the image again</Button></div> : <><ReceiptSkeleton /><span className="sr-only" role="status">Creating your share image</span></>}

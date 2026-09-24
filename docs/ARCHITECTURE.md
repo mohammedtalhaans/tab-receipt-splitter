@@ -6,7 +6,7 @@
 
 Navigation guards require items and an exact confirmed reference before People, at least one participant before Assign, complete assignments before Extras, and a valid reconciled split before Results. Going back does not destroy assignments. Removing a participant removes their ID from every assignment. Deleting an item removes its assignment. Starting a new scan resets the bill deliberately; starting a fresh split clears the scanner and session.
 
-The browser URL does not encode receipt data or route state. Reload returns to a clean home screen, including on a GitHub project page.
+An ordinary split keeps route state and receipt data out of the URL. Reload returns to a clean home screen, including on a GitHub project page. When a person deliberately chooses **Copy share link**, tab encodes the finalized split as a versioned URL fragment. Fragments are not included in HTTP requests. Opening a supported link decodes the snapshot locally and displays the same calculated shares in a read-only result view.
 
 ## Local image lifetime
 
@@ -52,7 +52,11 @@ A lazy Canvas module renders a summary image entirely locally. It waits for avai
 
 The Blob/File is prepared before the user’s native-share click so the click’s transient activation is preserved. `navigator.share` and `navigator.canShare` are feature-detected. Unsupported/denied sharing leaves Save Image and Copy Summary available. Clipboard denial reveals selectable text. Cancelling a native share is not treated as a failed bill.
 
-No app-owned network write occurs. A share target chosen by the user is outside the app’s privacy boundary.
+The link payload contains only fields needed to reproduce a reconciled split: receipt label, currency, confirmed total, line names/prices/quantities, printed charges and which are included, table names, ordered per-item claims, optional tip, and extra-allocation preference. Receiver-side participant/item IDs are recreated; recalculation runs through the ordinary integer-cent engine and must reconcile before display. Original images, OCR text/lines/confidence, app sessions and participant IDs are omitted. The versioned decoder bounds payload length/counts, validates every field and rejects malformed or unbalanced splits.
+
+Base64url is URL-safe encoding, not encryption. A split link does not expire and cannot be revoked. Someone who receives or forwards the full URL can see its embedded names, items and amounts. The `#tab-split=` fragment stays out of the static-site HTTP request, but recipients and clipboard/share destinations can retain the complete link. Only issue it after the user presses a link-sharing control.
+
+No app-owned network write occurs. An image, text, or link share target chosen by the user is outside this app's privacy boundary.
 
 ## Static origin and dependencies
 

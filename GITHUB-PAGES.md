@@ -17,6 +17,7 @@ No secrets are required. GitHub supplies the deployment token. The workflow perm
 - Open the actual HTTPS URL on your phone. Run **Try demo** through review, people, item assignment, extras, results, and sharing.
 - Scan a clear non-sensitive receipt. Check its recognized prices and printed total before continuing. Test a correction.
 - Generate the share card and try the phone's share/save action. Clipboard and native sharing depend on browser permissions and support.
+- Choose **Copy share link** and open it in a fresh browser tab. Confirm it shows the people, item assignments, charges, and exact results as a view-only split. The fragment contains no receipt photo.
 - Reload the page: the previous receipt and people should disappear.
 
 Physical phone cameras, native share sheets, and in-app browsers still need this on-device check. Local automated tests do not establish those capabilities.

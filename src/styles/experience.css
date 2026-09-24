@@ -55,6 +55,12 @@ body { font-size: 16px; }
 .aside-privacy small { font-size: 12px; }
 .header-step-name { display: none; }
 .mobile-step-picker { display: none; }
+.core-workspace.shared-readonly { grid-template-columns: 210px minmax(0, 780px); justify-content: center; gap: clamp(35px, 5vw, 80px); }
+.shared-readonly-aside .aside-note { margin-top: 38px; }
+.shared-readonly-aside .aside-note > span { font-size: 9px; }
+.shared-view-header { margin-left: auto; color: var(--muted); font-size: 12px; }
+.skip-link[role="link"] { cursor: pointer; }
+.app-main:focus { outline: none; }
 
 @media (max-width: 959px) {
   .home-copy { display: contents; }

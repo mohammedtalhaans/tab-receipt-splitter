@@ -5,6 +5,7 @@ import type { Action } from './state.ts';
 import type { AppState, SplitResult } from '../types/index.ts';
 import { useScanner } from '../features/ocr/use-scanner.ts';
 import { additionalTip, assignmentCount, calculateSplit, previewSubtotals, reconciliation } from '../features/splitting/engine.ts';
+import { readSharedLink } from '../features/sharing/share-link.ts';
 interface AppContextValue {
 
   state: AppState;
@@ -31,13 +32,19 @@ interface AppContextValue {
   registerOverlay: (dismiss: () => void) => () => void;
   dismissOverlay: () => boolean;
   getOverlayOpener: () => HTMLElement | null;
+  readOnlyShared: boolean;
+  shareLinkError: string | null;
+  dismissShareLinkError: () => void;
 }
 const Context = createContext<AppContextValue | null>(null);
 export function AppProvider({ children }: {
   children: ReactNode
  }) {
 
-  const [state, dispatch] = useReducer(reducer, undefined, initialState);
+  const [sharedBoot] = useState(() => readSharedLink(window.location.hash));
+  const [state, dispatch] = useReducer(reducer, sharedBoot.status === 'valid' ? sharedBoot.state : null, boot => boot ?? initialState());
+  const [readOnlyShared, setReadOnlyShared] = useState(sharedBoot.status === 'valid');
+  const [shareLinkError, setShareLinkError] = useState(sharedBoot.status === 'invalid' ? sharedBoot.message : null);
 
   const scanner = useScanner(dispatch);
 
@@ -61,12 +68,12 @@ export function AppProvider({ children }: {
   const registerOverlay = useCallback((dismiss: () => void) => {
     // On the first screen there is no earlier app entry for Back to dismiss a sheet.
     const position = history.state?.tabFlow;
-    const homeGuard = overlays.current.length === 0 && position?.stage === 'home' && position.index === 0;
-    if (homeGuard) history.pushState({ tabFlow: { ...position, index: 1 }, tabOverlay: true }, '');
+    const rootOverlayGuard = overlays.current.length === 0 && Number.isInteger(position?.index) && position.index === 0;
+    if (rootOverlayGuard) history.pushState({ tabFlow: { ...position, index: 1 }, tabOverlay: true }, '');
     overlays.current.push(dismiss);
     return () => {
       overlays.current = overlays.current.filter(entry => entry !== dismiss);
-      if (homeGuard && history.state?.tabOverlay && !overlays.current.length) history.back();
+      if (rootOverlayGuard && history.state?.tabOverlay && !overlays.current.length) history.back();
     };
   }, []);
   const dismissOverlay = useCallback(() => {
@@ -115,12 +122,20 @@ export function AppProvider({ children }: {
 
   const reset = () => {
     scanner.clear();
+    if (readOnlyShared) {
+      history.replaceState(history.state, '', `${window.location.pathname}${window.location.search}`);
+      setReadOnlyShared(false);
+    }
     dispatch({ type: 'RESET' });
     setResetOpen(false);
     setToast(null);
   };
+  const dismissShareLinkError = () => {
+    history.replaceState(history.state, '', `${window.location.pathname}${window.location.search}`);
+    setShareLinkError(null);
+  };
 
-  return <Context.Provider value={{ state, dispatch, scanner, receiptCheck, runningTotals, assigned, tipAmount, split: calculation.split, calculationError: calculation.error, notify, toast, aboutOpen, setAboutOpen, resetOpen, setResetOpen, reset, registerOverlay, dismissOverlay, getOverlayOpener }}>
+  return <Context.Provider value={{ state, dispatch, scanner, receiptCheck, runningTotals, assigned, tipAmount, split: calculation.split, calculationError: calculation.error, notify, toast, aboutOpen, setAboutOpen, resetOpen, setResetOpen, reset, registerOverlay, dismissOverlay, getOverlayOpener, readOnlyShared, shareLinkError, dismissShareLinkError }}>
     {children}
   </Context.Provider>;
 }

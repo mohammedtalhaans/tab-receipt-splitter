@@ -50,18 +50,18 @@ function About() {
       </div>
       <h3>Your receipt stays yours.</h3>
       <p>Receipt photos and extracted receipt contents are processed locally and are never uploaded by this app.</p>
-      <p>The app downloads static files, fonts and the OCR reader. Those are ordinary asset downloads, not uploads of your receipt. Sharing sends the summary only to the app or person you choose.</p>
+      <p>The app downloads static files, fonts and the OCR reader. Those are ordinary asset downloads, not uploads of your receipt. A split link puts names, items and amounts in its address so another browser can show the breakdown. The link is not encrypted or revocable; anyone who gets it can read those details. Your receipt photo is never included.</p>
       <div className="privacy-facts">
         <span>
           <Check size={15} />No accounts</span>
         <span>
           <Check size={15} />No analytics</span>
         <span>
-          <Check size={15} />No receipt storage</span>
+        <Check size={15} />No automatic saves</span>
         <span>
           <Check size={15} />No paid APIs</span>
       </div>
-      <p>Refresh or close the page to clear this session. Downloaded share images and anything you send to other apps remain wherever you save or share them.</p>
+      <p>Refresh or close the page to clear this session. A copied split link keeps working for anyone who has it; this app cannot revoke a link after it has been shared.</p>
       <Separator />
       <h3>Made in the open.</h3>
       <p>Local OCR with Tesseract.js. Deterministic parsing. Integer-only, exact-cent splitting. No server behind the curtain.</p>
@@ -79,7 +79,7 @@ function About() {
 }
 function Shell() {
 
-  const { state, dispatch, scanner, aboutOpen, setAboutOpen, resetOpen, setResetOpen, reset, toast } = useApp();
+  const { state, dispatch, scanner, aboutOpen, setAboutOpen, resetOpen, setResetOpen, reset, toast, readOnlyShared } = useApp();
   const reduced = useReducedMotion();
   const [progressOpen, setProgressOpen] = useState(false);
   const back = useFlowNavigation();
@@ -101,10 +101,10 @@ function Shell() {
   };
 
   return <div className={`app-root ${isHome ? 'at-home' : 'in-flow'}`}>
-    <a className="skip-link" href="#main-content">Skip to the app</a>
+    <a className="skip-link" href={readOnlyShared ? undefined : '#main-content'} tabIndex={readOnlyShared ? 0 : undefined} role={readOnlyShared ? 'link' : undefined} onClick={readOnlyShared ? event => { event.preventDefault(); document.getElementById('main-content')?.focus(); } : undefined}>Skip to the app</a>
     <header className="app-header">
       <div className="header-start">
-        {!isHome && <Hint label="Go back">
+        {!isHome && !readOnlyShared && <Hint label="Go back">
           <Button variant="ghost" size="icon" className="back-button" onClick={back} aria-label="Go back">
             <ArrowLeft size={19} />
           </Button>
@@ -119,7 +119,7 @@ function Shell() {
           <Brand />
         </button>
       </div>
-      {!isHome && <div className="header-step" aria-label={`Step ${step + 1} of 6`}>
+      {!isHome && !readOnlyShared && <div className="header-step" aria-label={`Step ${step + 1} of 6`}>
         <span className="mono">
           {String(step + 1).padStart(2, '0')}
           <span> / 06</span>
@@ -128,11 +128,12 @@ function Shell() {
           {steps.map((entry, index) => <span key={entry.stage} className={index <= step ? 'filled' : ''} />)}
         </div>
       </div>}
-      {!isHome && <button className="mobile-step-picker" aria-label={`Your progress: ${steps[step]?.short}, step ${step + 1} of 6`} aria-haspopup="dialog" aria-expanded={progressOpen} onClick={() => setProgressOpen(true)}>
+      {!isHome && !readOnlyShared && <button className="mobile-step-picker" aria-label={`Your progress: ${steps[step]?.short}, step ${step + 1} of 6`} aria-haspopup="dialog" aria-expanded={progressOpen} onClick={() => setProgressOpen(true)}>
         <span>{state.stage === 'processing' ? state.scan.phase === 'ready' ? 'Receipt ready' : state.scan.phase === 'error' ? 'Scan needs help' : 'Reading receipt' : steps[step]?.short}</span>
         <small>{step + 1} OF 6 <ChevronDown size={12} /></small>
       </button>}
       <div className="header-end">
+        {readOnlyShared && <span className="shared-view-header">Shared · view only</span>}
         {isHome && <span className="header-privacy">
           <LockKeyhole size={13} />100% ON DEVICE</span>}
         <Hint label="About & privacy">
@@ -142,8 +143,8 @@ function Shell() {
         </Hint>
       </div>
     </header>
-    <div className={isHome ? 'home-workspace' : 'core-workspace'}>
-      {!isHome && <aside className="flow-aside">
+    <div className={isHome ? 'home-workspace' : readOnlyShared ? 'core-workspace shared-readonly' : 'core-workspace'}>
+      {!isHome && !readOnlyShared && <aside className="flow-aside">
         <div className="aside-caption">ONE RECEIPT.<br />EVERYONE’S SHARE.</div>
         <ol className="flow-steps">
           {steps.map((entry, index) => <li key={entry.stage} className={index === step ? 'current' : index < step ? 'completed' : ''} aria-current={index === step ? 'step' : undefined}>
@@ -171,6 +172,10 @@ function Shell() {
           <ArrowUpRight size={14} />
         </button>
       </aside>}
+      {!isHome && readOnlyShared && <aside className="flow-aside shared-readonly-aside">
+        <div className="aside-caption">SHARED WITH YOU</div>
+        <div className="aside-note"><ShieldCheck size={22} /><p>A private copy of the split.<br />Explore each person’s items.</p><span className="mono">VIEW ONLY · NO RECEIPT PHOTO</span></div>
+      </aside>}
       <main id="main-content" className="app-main">
         <AnimatePresence mode="popLayout" initial={false}>
           <StageScreen key={state.stage} stage={state.stage} />
@@ -196,7 +201,7 @@ function Shell() {
         </button>)}
       </nav>
     </Modal>
-    <ConfirmDialog open={resetOpen} onOpenChange={setResetOpen} title="Start with a clean receipt?" description="This clears the current photo, people, assignments and totals from this session. Save or share the results first if you need them." actionLabel="Start a fresh split" onConfirm={reset} />
+    <ConfirmDialog open={resetOpen} onOpenChange={setResetOpen} title={readOnlyShared ? 'Start your own split?' : 'Start with a clean receipt?'} description={readOnlyShared ? 'This closes the shared view and starts a private split on this device. The original link still works for anyone who has it.' : 'This clears the current photo, people, assignments and totals from this session. Save or share the results first if you need them.'} actionLabel="Start a fresh split" onConfirm={reset} />
   </div>;
 }
 class ErrorBoundary extends Component<{
