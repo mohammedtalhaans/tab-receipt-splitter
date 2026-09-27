@@ -61,6 +61,9 @@ export type Action =
     id: string
    }
   | {
+    type: 'ACCEPT_RECEIPT_AND_CONTINUE'
+   }
+  | {
     type: 'ADD_PERSON';
     person: Participant
    }
@@ -189,6 +192,11 @@ export function reducer(state: AppState, action: Action): AppState {
 
     }
     case 'CONFIRM_ITEM': return { ...state, receipt: { ...state.receipt, items: state.receipt.items.map(item => item.id === action.id ? { ...item, confidence: 'good' } : item) } };
+    case 'ACCEPT_RECEIPT_AND_CONTINUE': return canEnter(state, 'people') ? {
+      ...state,
+      stage: 'people',
+      receipt: { ...state.receipt, items: state.receipt.items.map(item => ({ ...item, confidence: 'good' })) }
+    } : state;
     case 'ADD_PERSON': {
 
       const name = action.person.name.trim().slice(0, 32);

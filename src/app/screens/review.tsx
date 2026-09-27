@@ -39,7 +39,7 @@ export default function Review() {
   return <div className="review-screen">
     <PageHeading eyebrow={scan.imageUrl ? '02 / A QUICK SANITY CHECK' : '02 / YOUR RECEIPT, BY HAND'} title={receipt.items.length || scan.imageUrl ? <>Looks right?<br />
       <span className="muted-heading">Make it yours.</span>
-    </> : <>Start with<br /><span className="muted-heading">what you ordered.</span></>}>{scan.imageUrl ? 'Compare the names and prices with your receipt, then check the total.' : 'Add each item’s full line price. You can keep adding without closing the editor.'}</PageHeading>
+    </> : <>Start with<br /><span className="muted-heading">what you ordered.</span></>}>{scan.imageUrl ? 'Change anything that looks off, then continue. We’ll make sure the receipt total adds up.' : 'Add each item’s full line price. You can keep adding without closing the editor.'}</PageHeading>
     <button className="receipt-label-button" aria-label={`Edit receipt details for ${receipt.label}`} onClick={() => setMetaOpen(true)}>
       <ReceiptText size={16} />
       <span>
@@ -61,7 +61,7 @@ export default function Review() {
         <span><Image size={17} />Compare photo</span>
       </button>}
     </div>}
-    {uncertain > 0 && <Notice kind="warning" title={`${uncertain} ${uncertain === 1 ? 'item could' : 'items could'} use a second look.`}>The marked lines were harder to read. Check their name and price; tap “Looks right” once you’ve checked.</Notice>}
+    {uncertain > 0 && <Notice kind="warning" title={`${uncertain} ${uncertain === 1 ? 'line is' : 'lines are'} a little harder to read.`}>Edit any that look wrong. Continue accepts the remaining names and prices as shown, all at once.</Notice>}
     {receipt.items.length > 0 && <div className="review-list-heading"><h2>Receipt items</h2><span>{receipt.items.length} {receipt.items.length === 1 ? 'line' : 'lines'}</span></div>}
     {(uncertain > 0 || onlyUncertain) && <div className="review-filters" aria-label="Items to review">
       <button aria-pressed={!onlyUncertain} onClick={() => setOnlyUncertain(false)}>All items ({receipt.items.length})</button>
@@ -141,8 +141,8 @@ export default function Review() {
       <Button variant="ghost" onClick={() => dispatch({ type: 'GO', stage: 'capture' })}>
         <RotateCcw size={15} />Scan again</Button>
     </div>
-    <BottomAction note={!receiptCheck.matched && receipt.items.length ? 'Check or confirm the total to keep going.' : undefined}>
-      <Button size="large" disabled={!receipt.items.length || !receiptCheck.matched} onClick={() => dispatch({ type: 'GO', stage: 'people' })}>Looks good. Who’s in?<ArrowRight size={20} className="button-end" />
+    <BottomAction note={!receiptCheck.matched && receipt.items.length ? 'Check or confirm the total to keep going.' : uncertain > 0 ? 'Continue accepts all marked items as shown.' : undefined}>
+      <Button size="large" disabled={!receipt.items.length || !receiptCheck.matched} onClick={() => dispatch({ type: 'ACCEPT_RECEIPT_AND_CONTINUE' })}>Looks good. Who’s in?<ArrowRight size={20} className="button-end" />
       </Button>
     </BottomAction>
     <ItemEditor open={itemOpen} onOpenChange={setItemOpen} item={editing} />
